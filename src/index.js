@@ -22,6 +22,62 @@ if (minutes < 10) {
 
 h2.innerHTML = `${day} ${hours}:${minutes}`;
 
+function hourlyForecast() {
+  let forecastElement = document.querySelector("#hor-display");
+
+  let forecastHTML = `<div class="row">`;
+  let hours = ["9AM", "10AM", "11AM", "12PM", "1PM"];
+  hours.forEach(function (hour) {
+    forecastHTML =
+      forecastHTML +
+      `
+  <div class="col-2">
+    <div class="weather-forecast-hourly">${hour}
+      <div>
+        <img
+          src="http://openweathermap.org/img/wn/50d@2x.png"
+          alt=""
+          width="42"
+        />
+        <div class="hourly-forecast">
+          <span class="hourly-forecast-max">18 </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function weeklyForecast() {
+  let forecastElement = document.querySelector("#ver-display");
+
+  let forecastHTML = `<div class="second-row">`;
+  let weekly = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
+  weekly.forEach(function (weekday) {
+    forecastHTML =
+      forecastHTML +
+      `
+      <div class="col-10">
+      <div class="weather-forecast-weekly">${weekday}</div>
+      <span class="weekly-icon-temp"> 18
+      <img src="http://openweathermap.org/img/wn/50d@2x.png"
+      alt=""
+      width="42"
+      />
+      </span>
+    </div>
+</div>
+</div>
+</div>
+  `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function celsius(event) {
   event.preventDefault();
   let celsiusTemp = document.querySelector("#temperature");
@@ -47,6 +103,9 @@ function currentWeather(response) {
   document.querySelector("#description").innerHTML =
     response.data.weather[0].main;
 }
+
+hourlyForecast();
+weeklyForecast();
 
 function searchCity(city) {
   let apiKey = "b95e4d9ece25e5d23a804d0d19379e1f";
